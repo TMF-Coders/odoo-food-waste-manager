@@ -24,7 +24,6 @@ Key Features:
         'data/ir_sequence_data.xml',
         'data/default_reasons_data.xml',
         'views/food_waste_menus.xml',
-        'views/res_config_settings_views.xml',
         'views/food_waste_kiosk_action.xml',
         'views/food_waste_category_views.xml',
         'views/food_waste_reason_views.xml',
