@@ -17,7 +17,7 @@ Key Features:
     """,
     'author': 'TMFCoders SL',
     'license': 'OPL-1',
-    'depends': ['stock', 'product', 'hr'],
+    'depends': ['stock', 'product', 'hr', 'vituallas_core'],
     'data': [
         'security/food_waste_security.xml',
         'security/ir.model.access.csv',

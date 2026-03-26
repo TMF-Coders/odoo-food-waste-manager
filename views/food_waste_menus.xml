@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <!-- Top Menu -->
-        <menuitem id="menu_food_waste_root" 
-                  name="Food Waste" 
-                  web_icon="food_waste_manager,static/description/icon.png"
-                  sequence="100"/>
+        <!-- Use the unified root menu from vituallas_core -->
+        <menuitem id="menu_food_waste_module" 
+                  name="Waste Management" 
+                  parent="vituallas_core.menu_vituallas_root" 
+                  sequence="20"/>
                   
         <menuitem id="menu_food_waste_kiosk" 
-                  name="Kiosk Mode" 
-                  parent="menu_food_waste_root" 
+                  name="Waste Kiosk" 
+                  parent="menu_food_waste_module" 
                   action="action_food_waste_kiosk"
                   sequence="5"/>
 
         <menuitem id="menu_food_waste_records" 
                   name="Records" 
-                  parent="menu_food_waste_root" 
+                  parent="menu_food_waste_module" 
                   sequence="10"/>
 
         <menuitem id="menu_food_waste_config" 
                   name="Configuration" 
-                  parent="menu_food_waste_root" 
+                  parent="menu_food_waste_module" 
                   sequence="100" 
                   groups="food_waste_manager.group_food_waste_manager"/>
     </data>
