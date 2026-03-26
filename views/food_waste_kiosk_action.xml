@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_food_waste_kiosk" model="ir.actions.client">
+        <field name="name">Food Waste Kiosk</field>
+        <field name="tag">food_waste_kiosk_action</field>
+        <field name="target">fullscreen</field>
+    </record>
+</odoo>

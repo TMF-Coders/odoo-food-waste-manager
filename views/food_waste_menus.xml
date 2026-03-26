@@ -7,6 +7,12 @@
                   web_icon="food_waste_manager,static/description/icon.png"
                   sequence="100"/>
                   
+        <menuitem id="menu_food_waste_kiosk" 
+                  name="Kiosk Mode" 
+                  parent="menu_food_waste_root" 
+                  action="action_food_waste_kiosk"
+                  sequence="5"/>
+
         <menuitem id="menu_food_waste_records" 
                   name="Records" 
                   parent="menu_food_waste_root" 

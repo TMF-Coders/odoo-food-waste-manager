@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="food_waste_manager.Kiosk">
+        <div class="o_food_waste_kiosk_container d-flex flex-column h-100 bg-100">
+            <!-- Header -->
+            <div class="o_kiosk_header d-flex justify-content-between align-items-center p-4 bg-white shadow-sm">
+                <h2 class="m-0 text-primary fw-bold">
+                    <i class="fa fa-trash-o me-2"/> Food Waste Kiosk
+                </h2>
+                <button class="btn btn-outline-secondary btn-lg" t-on-click="() => this.env.services.action.doAction('base.action_ui_view')">
+                    <i class="fa fa-times"/> Close
+                </button>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="o_kiosk_main flex-grow-1 p-4 overflow-auto">
+                <div class="container-fluid">
+                    
+                    <!-- Step 1: Select Category -->
+                    <div t-if="state.step === 'category'" class="kiosk-step fade-in">
+                        <h3 class="text-center mb-4">1. What kind of waste? (Category)</h3>
+                        <div class="row g-4 justify-content-center">
+                            <t t-foreach="state.categories" t-as="category" t-key="category.id">
+                                <div class="col-6 col-md-4 col-lg-3">
+                                    <div class="kiosk-card card h-100 cursor-pointer shadow-sm text-center p-4" t-on-click="() => this.selectCategory(category.id)">
+                                        <i class="fa fa-tags fa-3x text-secondary mb-3"/>
+                                        <h4 class="card-title m-0" t-esc="category.name"/>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Select Product -->
+                    <div t-if="state.step === 'product'" class="kiosk-step fade-in">
+                        <div class="d-flex align-items-center mb-4">
+                            <button class="btn btn-secondary btn-lg me-3" t-on-click="goBack"><i class="fa fa-arrow-left"/></button>
+                            <h3 class="m-0 flex-grow-1 text-center">2. Select Product</h3>
+                        </div>
+                        <div class="row g-4 justify-content-center">
+                            <t t-foreach="state.products" t-as="product" t-key="product.id">
+                                <div class="col-6 col-md-4 col-lg-3">
+                                    <div class="kiosk-card card h-100 cursor-pointer shadow-sm text-center p-4" t-on-click="() => this.selectProduct(product.id, product.uom_id)">
+                                        <i class="fa fa-cube fa-3x text-info mb-3"/>
+                                        <h4 class="card-title m-0" t-esc="product.name"/>
+                                    </div>
+                                </div>
+                            </t>
+                            <div t-if="state.products.length === 0" class="col-12 text-center text-muted">
+                                <h4>No products found for this category.</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Select Reason -->
+                    <div t-if="state.step === 'reason'" class="kiosk-step fade-in">
+                        <div class="d-flex align-items-center mb-4">
+                            <button class="btn btn-secondary btn-lg me-3" t-on-click="goBack"><i class="fa fa-arrow-left"/></button>
+                            <h3 class="m-0 flex-grow-1 text-center">3. Why is it wasted?</h3>
+                        </div>
+                        <div class="row g-4 justify-content-center">
+                            <t t-foreach="state.reasons" t-as="reason" t-key="reason.id">
+                                <div class="col-6 col-md-4 col-lg-3">
+                                    <div class="kiosk-card card h-100 cursor-pointer shadow-sm text-center p-4" t-on-click="() => this.selectReason(reason.id)">
+                                        <i t-attf-class="fa fa-warning fa-3x mb-3 {{ reason.type === 'avoidable' ? 'text-danger' : 'text-warning' }}"/>
+                                        <h4 class="card-title m-0" t-esc="reason.name"/>
+                                        <span class="badge rounded-pill mt-2" t-attf-class="{{ reason.type === 'avoidable' ? 'text-bg-danger' : 'text-bg-warning' }}" t-esc="reason.type"/>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Quantity -->
+                    <div t-if="state.step === 'quantity'" class="kiosk-step fade-in">
+                        <div class="d-flex align-items-center mb-4">
+                            <button class="btn btn-secondary btn-lg me-3" t-on-click="goBack"><i class="fa fa-arrow-left"/></button>
+                            <h3 class="m-0 flex-grow-1 text-center">4. How much? (<t t-esc="state.selectedUomName"/>)</h3>
+                        </div>
+                        
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-6 col-lg-4 text-center">
+                                <div class="display-1 fw-bold mb-4 bg-white border rounded py-3 shadow-inner">
+                                    <t t-esc="state.quantity || '0'"/>
+                                </div>
+                                
+                                <div class="numpad grid gap-2" style="display: grid; grid-template-columns: repeat(3, 1fr);">
+                                    <t t-foreach="['1','2','3','4','5','6','7','8','9','C','0','.']" t-as="btn" t-key="btn">
+                                        <button class="btn btn-light btn-lg border shadow-sm py-3 fs-3" 
+                                                t-attf-class="{{ btn === 'C' ? 'text-danger' : '' }}"
+                                                t-on-click="() => this.numpadPress(btn)">
+                                            <t t-esc="btn"/>
+                                        </button>
+                                    </t>
+                                </div>
+                                
+                                <button class="btn btn-primary btn-lg w-100 mt-4 py-3 fs-3 shadow" 
+                                        t-att-disabled="!state.quantity || parseFloat(state.quantity) === 0"
+                                        t-on-click="submitRecord">
+                                    <i class="fa fa-check"/> Confirm Waste
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Success -->
+                    <div t-if="state.step === 'success'" class="kiosk-step fade-in text-center py-5">
+                        <i class="fa fa-check-circle text-success" style="font-size: 8rem;"/>
+                        <h1 class="mt-4 fw-bold">Waste Recorded Successfully</h1>
+                        <p class="fs-4 text-muted">Thank you for helping us track waste.</p>
+                        <button class="btn btn-primary btn-lg mt-4 px-5 py-3 fs-3 shadow" t-on-click="resetKiosk">
+                            Register Another
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

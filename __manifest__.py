@@ -24,10 +24,18 @@ Key Features:
         'data/ir_sequence_data.xml',
         'data/default_reasons_data.xml',
         'views/food_waste_menus.xml',
+        'views/food_waste_kiosk_action.xml',
         'views/food_waste_category_views.xml',
         'views/food_waste_reason_views.xml',
         'views/food_waste_record_views.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'food_waste_manager/static/src/components/kiosk/food_waste_kiosk.scss',
+            'food_waste_manager/static/src/components/kiosk/food_waste_kiosk.xml',
+            'food_waste_manager/static/src/components/kiosk/food_waste_kiosk.js',
+        ],
+    },
     'installable': True,
     'application': True,
 }
