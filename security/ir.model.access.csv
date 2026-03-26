@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_food_waste_category_user,food.waste.category.user,model_food_waste_category,group_food_waste_user,1,0,0,0
+access_food_waste_category_manager,food.waste.category.manager,model_food_waste_category,group_food_waste_manager,1,1,1,1
+access_food_waste_reason_user,food.waste.reason.user,model_food_waste_reason,group_food_waste_user,1,0,0,0
+access_food_waste_reason_manager,food.waste.reason.manager,model_food_waste_reason,group_food_waste_manager,1,1,1,1
+access_food_waste_record_user,food.waste.record.user,model_food_waste_record,group_food_waste_user,1,1,1,0
+access_food_waste_record_manager,food.waste.record.manager,model_food_waste_record,group_food_waste_manager,1,1,1,1

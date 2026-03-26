@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="reason_expired" model="food.waste.reason">
+            <field name="name">Expired in Storage</field>
+            <field name="type">avoidable</field>
+        </record>
+        <record id="reason_prep_error" model="food.waste.reason">
+            <field name="name">Preparation Error</field>
+            <field name="type">avoidable</field>
+        </record>
+        <record id="reason_plate_leftovers" model="food.waste.reason">
+            <field name="name">Plate Leftovers</field>
+            <field name="type">avoidable</field>
+        </record>
+        <record id="reason_trimming" model="food.waste.reason">
+            <field name="name">Trimmings / Peels / Bones</field>
+            <field name="type">unavoidable</field>
+        </record>
+    </data>
+</odoo>
