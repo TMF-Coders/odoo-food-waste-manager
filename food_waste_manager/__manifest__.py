@@ -2,7 +2,7 @@
     'name': 'Food Waste Management & Kiosk',
     'version': '19.0.1.0.0',
     'category': 'Inventory/Inventory',
-    'images': ['static/description/main_screenshot.png'],
+    'images': ['static/description/banner.png'],
     'summary': 'Track, measure, and analyze food waste with a touch Kiosk interface',
     'description': """
 Food Waste Management
